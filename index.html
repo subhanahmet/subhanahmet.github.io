@@ -246,7 +246,7 @@
         <td scope="row" id="olcu_vahidi">${add_olcu_vahidi.value}</td>
         <td scope="row" id="miqdar">${add_miqdar.value}</td>
         <td scope="row" id="qiymet">${parseFloat(add_qiymet.value)}</td>
-        <td scope="row" class="mebleg">${add_miqdar.value * parseFloat(add_qiymet.value)}</td>
+        <td scope="row" class="mebleg">${(add_miqdar.value * parseFloat(add_qiymet.value)).toFixed(1)}
         <td style="display: flex;"><button id='edit_product'><i class="fa-solid fa-pen-to-square"></i></button> <button class="rm" id='remove_product'><i class="fa-regular fa-trash-can"></i></button></td> 
         </tr>
         `
@@ -317,8 +317,17 @@
 
     let names = [
       '32 mm boru fiber (Plasterm)',
+      '32 mm boru fiber',
+      '50 mm boru sadə',
       '25 mm boru fiber (Plasterm)',
       '25 mm boru sadə (Plasterm)',
+      '40 mm boru fiber',
+      '50 mm boru fiber',
+      '32 mm əks qlapan (disk)',
+      'Boya 2 lt',
+      'Divar tipli qazan 115 kW',
+      'Dövriyyə nasosu (Wilo)',
+      '50 mm boru fiber',
       '32 mm çuxol (flex)',
       '25 mm çuxol (flex)',
       'PPRC Boru xırdavatı 40%',
@@ -381,6 +390,9 @@
       'Limit sensoru',
       'Kollektor xamutu',
       'Pena',
+      'Dövriyyə nasosu',
+      '15 dəmir traynik',
+      '32 flans',
       '32 mm çöl diş amerkanka',
       '32 mm amerkanka',
       'Termoregulyator',
