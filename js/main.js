@@ -137,7 +137,7 @@
 	$(function(){
 		// contentWayPoint();
 		// goToTop();
-		// loaderPage();
+		loaderPage();
 		fullHeight();
 		parallax();
 		// pieChart();
