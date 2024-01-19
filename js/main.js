@@ -137,7 +137,7 @@
 	
 	$(function(){
 		// contentWayPoint();
-		goToTop();
+		//goToTop();
 		loaderPage();
 		fullHeight();
 		parallax();
