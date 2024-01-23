@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="styles v2.css">
+</head>
+
+<body>
+
+  <div class="accordion-body">
+    <div class="wrapper">
+      <!-- <div class="allsides-7">7. Hover me </div> -->
+      <div  class="nav-bar">
+        <ul>
+          <li>
+            <a href="https://highping.com.tr" target="_blank" class="un">Ana Sayfa</a>
+          </li>
+          <li>
+            <a href="https://blog.highping.com.tr" target="_blank" class="un">Blog</a>
+          </li>
+        </ul>
+      </div>
+      <!-- <span class="un">Underlined Text</span> -->
+
+      <h2 class="header_text">GTM'de En Çok İhtiyacınız Olan Değişkenler</h2>
+
+      <hr>
+
+
+      <div class="accordion-panel">
+
+        <div class="topic_title">
+          <div class='order'>
+            <span>1</span>
+          </div>
+
+          <h2>
+            <button class="accordion-trigger" aria-expanded="false" aria-controls="accordion1-content">
+              Sayfa Başlık Değerini Alma
+            </button>
+          </h2>
+        </div>
+
+        <div class="accordion-content" role="region" aria-labelledby="panel1-title" aria-hidden="true">
+          <div>
+            <p>Tarayıcı sekmesinde gördüğünüz site başlığını title etiketinden alabilirsiniz.</p>
+
+            <pre>
+function pageTitle() {
+  var title = document.querySelector('title').innerText
+  return title
+}
+</pre>
+
+
+
+          </div>
+        </div>
+      </div>
+
+      <!-- 📌 Sayfa Başlık Değeri END -->
+
+      <hr>
+
+      <!-- 📌 Sayfa Yenilenme Sayısı -->
+
+      <div class="accordion-panel">
+
+        <div class="topic_title">
+          <div class='order'>
+            <span>2</span>
+          </div>
+
+          <h2>
+            <button class="accordion-trigger" aria-expanded="false" aria-controls="accordion1-content">
+              Sayfa Yenilenme Sayısı
+            </button>
+          </h2>
+        </div>
+
+        <div class="accordion-content" role="region" aria-labelledby="panel1-title" aria-hidden="true">
+          <div>
+            <p>Bir sayfanın kullanıcı tarafından kaç defa yenilendiğini ölçebilirsiniz.</p>
+
+            <pre>
+function reloadCount() {
+  var state = history.state || {};
+  var reloadCount = state.reloadCount || 0;
+  if (performance.navigation.type === 1) {
+    state.reloadCount = ++reloadCount;
+    history.replaceState(state, null, document.URL);
+  } else if (reloadCount) {
+    delete state.reloadCount;
+    reloadCount = 0;
+    history.replaceState(state, null, document.URL);
+  }
+
+  return reloadCount
+}
+</pre>
+
+
+
+          </div>
+        </div>
+      </div>
+
+      <!-- 📌 Sayfa Yenilenme Sayısı END -->
+
+      <hr>
+
+      <!-- 📌 Değişkenden Rakamlar Haricinde Her Şeyi Silmek -->
+
+      <div class="accordion-panel">
+
+        <div class="topic_title">
+          <div class='order'>
+            <span>3</span>
+          </div>
+
+          <h2>
+            <button class="accordion-trigger" aria-expanded="false" aria-controls="accordion1-content">
+              Değişkenden Rakamlar Haricinde Her Şeyi Silmek
+            </button>
+          </h2>
+        </div>
+
+        <div class="accordion-content" role="region" aria-labelledby="panel1-title" aria-hidden="true">
+          <div>
+            <p>
+              Elde ettiğiniz değişkenin içindeki rakamlar haricindeki tüm değerleri kaldırmak ki <code>
+                <strong>regex</strong> </code> kullanabilirsiniz.
+            </p>
+            <pre>
+let text = "Highping34.4--//96)qwerty%)"
+let newText = text.replaceAll(/[^\d]/g, '')
+
+// Sonuç: newText = 34496
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- 📌 Değişkenden Rakamlar Haricinde Her Şeyi Silmek END -->
+
+      <hr>
+
+      <!-- 📌 Ürün Fiyatının Küsüratını Noktalı Yapma -->
+
+      <div class="accordion-panel">
+
+        <div class="topic_title">
+          <div class='order'>
+            <span>4</span>
+          </div>
+
+          <h2>
+            <button class="accordion-trigger" aria-expanded="false" aria-controls="accordion1-content">
+              Ürün Fiyatının Küsüratını Noktalı Yapma
+            </button>
+          </h2>
+        </div>
+
+        <div class="accordion-content" role="region" aria-labelledby="panel1-title" aria-hidden="true">
+          <div>
+            <p>
+              GA4 başta olmak üzere tüm veri toplama araçları ürün fiyatı, sepet değeri ve ya sipariş
+              toplam tutarını hem tam sayı hem de küsüratlı kabul ediyor.
+            </p>
+            <p>
+              Fakat küsüratlı değerlerde istenen şart; küsüratın nokta ile ayrılmasıdır. <br>
+              Yani tarayıcıda gördüğünüz 1,435.56 TRY, 2.567,32 TRY şeklinde tutarları kabul etmez. <br>
+              <u>Not: Değerlerin tarayıcıda farklı gözükmesi çoğu zaman kullanıcının değeri rahat
+                okuyabilmesi içindir.</u> <br>
+              GA4'ün kabul ettiği değerlerin 1435.56 TRY ve 2567.32 TRY (para birimi olmadan) şeklinde
+              olması gerekiyor. <br>
+              <br>
+              Bunun için yapılacak bir kaç işlem var; önce <code><strong>replaceAll</strong></code>
+              metodunu ele alalım.
+            </p>
+
+            <hr class="hr-text" id="hr-border" data-content="replaceAll">
+
+            <pre>
+// On, yüz, bin, yüzbin ve ya milyonluk değerlerin virgül ile ayrıldığı, küsüratın ise nokta ile ayrıldığı değerler.
+// Bu tür değerlerde virgülü silersek işimiz tamamlanacak.
+
+let fiyat = '1,567,435.56'
+let yeniFiyat = fiyat.replaceAll(',','') // Yeni fiyat 1567435.56
+
+// Tam tersi durumlarda; küsüratın virgülle, diğerlerin nokta ile ayrıldığı değerler.
+// Bu tür değerlerde önce noktaları kaldırıp, sonda virgülü noktaya çevirebiliriz.
+
+let fiyat = '1.567.435,56'
+let yeniFiyat = fiyat.replaceAll('.','').replace(',','.') // Yeni fiyat 1567435.56
+</pre>
+
+            <p>
+              <code><strong>replace</strong> ve <strong>replaceAll</strong></code> haricinde bir fonksiyon
+              var ki girilen tüm değerlerin küsüratını noktalı yapar.
+            </p>
+
+            <hr class="hr-text" id="hr-border" data-content="function">
+
+            <pre>
+function totalPrice() {
+  var price = '1234.564,67'
+  if (price.includes(',') || price.includes('.')) {
+    var commaReplacePrice = price.replaceAll(',', '.')
+    var token = '.'
+    /* Requires STRING not contain TOKEN */
+    var parts = commaReplacePrice.split(token);
+    if (price.length <= 4) {
+      return price
+    } else {
+      return parts.slice(0, -1).join('') + '.' + parts.slice(-1)
+    }
+  } else {
+    return price
+  }
+}
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- 📌 Ürün Fiyatının Küsüratını Noktalı Yapma END -->
+
+      <hr>
+
+      <!-- 📌 Tıklanan Elementin Değerlerini Alma -->
+      <div class="accordion-panel">
+
+        <div class="topic_title">
+          <div class='order'>
+            <span>5</span>
+          </div>
+
+          <h2>
+            <button class="accordion-trigger" aria-expanded="false" aria-controls="accordion1-content">
+              Tıklanan Elementin Değerlerini Alma
+            </button>
+          </h2>
+        </div>
+
+        <div class="accordion-content" role="region" aria-labelledby="panel1-title" aria-hidden="true">
+          <div>
+            <p>JavaScript <code><strong>addEventListener</strong></code> ve ya
+              <code><strong>onclick</strong></code> metodu ile tarayıcıda tıklanan
+              öğenin elementini yakayabilirsiniz.</p>
+            <p>
+              Önce metodu konsola yazarak doğruluğunu kontrol ediyoruz:
+            </p>
+
+            <hr class="hr-text" id="hr-border" data-content="addEventListener">
+
+            <pre>
+document.addEventListener("click", function (event) {
+    var targetElement = event.target;
+    console.log(targetElement);
+    return "";
+});
+</pre>
+
+            <hr class="hr-text" id="hr-border" data-content="onlick">
+
+            <pre>
+document.onclick = function (event) {
+    var targetElement = event.target;
+    console.log(targetElement);
+    return "";
+};
+</pre>
+
+            <p>Şimdi de en çok ihtiyaç duyulan elementin metin, class, id ve varsa url değerlerini değişkene
+              atayabilirsiniz.</p>
+
+            <pre>
+document.onclick = function (event) {
+    elementText = event.target.innerText;
+    elementClass = event.target.className;
+    elementUrl = event.target.href;
+    elementId = event.target.id;
+
+    // globalThis değişkeni fonksyiondan çıkararak global değişken haline getirir.
+    globalThis.elementText;
+    globalThis.elementClass;
+    globalThis.elementUrl;
+    globalThis.elementId;
+    return ''
+};
+</pre>
+
+            <p>
+              Fakat GTM tıklama takiplerini JS kodu yazmadan da takip edilebileceğimiz tetikleyiciler
+              eklemiştir.
+              Bu tıklanmaları da kendi içinde ikiye ayırmış; Öğe Tıklanmaları ve Link Tıklanmaları. Fark
+              şudur; tüm tıklamalar Öğe Tıklamalarına dahildir, Link Tıklamaları ise içinde url (href)
+              barındıran buton ve ya link tıklamalarıdır.
+              Öğe Tıklamaları için; <b>Tıklama > Tüm Öğeler (Click > All Elements)</b> , Link Tıklamaları
+              için; Tıklama > Yazlınca Bağlantılar (Click > Just Links) tetikleyicisini oluşturmamız
+              gerekiyor. Tetikleyici, kullanıcının eylemini takip eder. Bu eylemin değerlerini değişkenler
+              takip eder. Dolayısı ile sadece Click ve ya Link Click tetikleyicilerini kurmak yeterli
+              sayılmaz. Aynı zamanda bu tetikleyici türüne denk değişken türlerini de aktif etmemiz
+              gerekiyor. Bunun için Değişkenler bölümünden Yerleşik Değişkenlerden Tıklama türündeki
+              değişkenleri aktif ediyoruz.
+              İşlem sonucu şu olacak: Click tetikleyici ile tıklanan elementin Class ismini, mentini ve ya
+              url değerlerini ölçebilirsiniz.
+            </p>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- 📌 Tıklanan Elementin Değerlerini Alma END -->
+
+      <hr>
+
+      <div class="accordion-panel">
+
+        <div class="topic_title">
+          <div class='order'>
+            <span>6</span>
+          </div>
+
+          <h2>
+            <button class="accordion-trigger" aria-expanded="false" aria-controls="accordion1-content">
+              Title 6
+            </button>
+          </h2>
+        </div>
+
+        <div class="accordion-content" role="region" aria-labelledby="panel1-title" aria-hidden="true">
+          <div>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab nulla blanditiis hic atque perferendis! Non deleniti sed amet culpa nulla voluptas officia, dolorum officiis, eius, sunt facere repellendus temporibus recusandae animi. Excepturi voluptatum eius labore corporis blanditiis odio aspernatur totam maiores officiis aliquam. Quibusdam numquam ut quidem nulla qui adipisci molestiae non dolor velit ad eum sint explicabo ratione eligendi, voluptatem sit dolorum inventore repellendus. Eligendi minus enim natus tempore, atque voluptates at ducimus alias consequatur asperiores sapiente quisquam animi obcaecati esse maxime molestiae pariatur consequuntur ipsa blanditiis voluptas sed rem non vel ex. Odit saepe fugit consectetur dolorem commodi.</p>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="accordion-panel">
+
+        <div class="topic_title">
+          <div class='order'>
+            <span>7</span>
+          </div>
+
+          <h2>
+            <button class="accordion-trigger" aria-expanded="false" aria-controls="accordion1-content">
+              Title 7
+            </button>
+          </h2>
+        </div>
+
+        <div class="accordion-content" role="region" aria-labelledby="panel1-title" aria-hidden="true">
+          <div>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem harum natus rerum sapiente
+            fugiat soluta nostrum voluptatem totam libero laudantium esse laborum temporibus fugit, aliquid
+            consectetur ipsa perspiciatis explicabo labore?
+
+            <pre>
+
+                            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"primary visible info"</span>&gt;</span>Item<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                        
+                      </pre>
+
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nostrum, at. Tempore quae quo dicta
+            ratione esse excepturi, ad culpa eveniet!
+
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+    </div>
+  </div>
+
+  <script src="/gtm-tips/index v2.js" type="text/javascript"></script>
+
+
+
+</body>
+
+</html>
