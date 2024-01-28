@@ -1,18 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>HighPing - Google Tag Manager Tips</title>
+  <meta property="og:title" content="HighPing - Google Tag Manager İpuçları">
+  <meta property="og:type" content="article">
+  <meta property="og:description" content="Goole Tag Manager'de En Çok Kullanılan Özel Değişkenler">
+  <meta property="og:url" content="https://highping.com.tr/gtm-tips">
+  <meta name="author" content="Sübhan Ahmet">
+  <title>HighPing - Google Tag Manager İpuçları</title>
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-NHDT4TZ');</script>
+  <!-- End Google Tag Manager -->
+
   <link rel="stylesheet" href="styles v2.css">
 </head>
 
 <body>
 
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NHDT4TZ"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
   <div class="accordion-body">
     <div class="wrapper">
+      <div class="subhan">
+        
+      </div>
       <!-- <div class="allsides-7">7. Hover me </div> -->
       <div  class="nav-bar">
         <ul>
@@ -26,7 +48,7 @@
       </div>
       <!-- <span class="un">Underlined Text</span> -->
 
-      <h2 class="header_text">GTM'de En Çok İhtiyacınız Olan Değişkenler</h2>
+      <h2 class="header_text">GTM'de En Çok Kullanılan Özel Değişkenler</h2>
 
       <hr>
 
@@ -47,7 +69,8 @@
 
         <div class="accordion-content" role="region" aria-labelledby="panel1-title" aria-hidden="true">
           <div>
-            <p>Tarayıcı sekmesinde gördüğünüz site başlığını title etiketinden alabilirsiniz.</p>
+            <p>Tarayıcı sekmesinde gördüğünüz site başlığını almak için <code>
+              <strong>title</strong> </code> etiketini kullanabiliriz..</p>
 
             <pre>
 function pageTitle() {
@@ -132,12 +155,12 @@ function reloadCount() {
         <div class="accordion-content" role="region" aria-labelledby="panel1-title" aria-hidden="true">
           <div>
             <p>
-              Elde ettiğiniz değişkenin içindeki rakamlar haricindeki tüm değerleri kaldırmak ki <code>
+              Elde ettiğiniz değişkenden rakamlar haricindeki tüm değerleri kaldırmak için <code>
                 <strong>regex</strong> </code> kullanabilirsiniz.
             </p>
             <pre>
-let text = "Highping34.4--//96)qwerty%)"
-let newText = text.replaceAll(/[^\d]/g, '')
+var text = "Highping34.4--//96)qwerty%)"
+var newText = text.replaceAll(/[^\d]/g, '')
 
 // Sonuç: newText = 34496
 </pre>
@@ -168,35 +191,41 @@ let newText = text.replaceAll(/[^\d]/g, '')
         <div class="accordion-content" role="region" aria-labelledby="panel1-title" aria-hidden="true">
           <div>
             <p>
-              GA4 başta olmak üzere tüm veri toplama araçları ürün fiyatı, sepet değeri ve ya sipariş
-              toplam tutarını hem tam sayı hem de küsüratlı kabul ediyor.
+              GA4 de dahil olmak üzere tüm veri toplama araçları ürün fiyatı, sepet değeri ve ya sipariş
+              toplam tutarını <code><strong>Number</strong></code> formatında kabul ediyor.
             </p>
             <p>
-              Fakat küsüratlı değerlerde istenen şart; küsüratın nokta ile ayrılmasıdır. <br>
-              Yani tarayıcıda gördüğünüz 1,435.56 TRY, 2.567,32 TRY şeklinde tutarları kabul etmez. <br>
-              <u>Not: Değerlerin tarayıcıda farklı gözükmesi çoğu zaman kullanıcının değeri rahat
-                okuyabilmesi içindir.</u> <br>
-              GA4'ün kabul ettiği değerlerin 1435.56 TRY ve 2567.32 TRY (para birimi olmadan) şeklinde
+              Nedir Number formatı?
+              JavaScript'te Number formatı sadece rakam kabul eden değişken türüdür.
+              Rakam haricinde kabul ettiği değer noktadır. Yani küsüratları rakamla ayırabiliriz.
+              Aksi taktirde ya kabul etmez ya da noktaya kadar bölümü okur, geriye kanaları görmezden gelir.
+              <br>
+              Tarayıcıda gördüğünüz 1,435.56, 2.567,32 şeklinde tutarları kabul etmez.
+              <br>
+              Bu şekilde gönderdiğiniz değerlerden 1. fiyatı 435.56, 2. fiyatı 32 tl olarak okuyacaktır.
+              Aralarında çok büyük fark olduğunu söylemeye gerek yoktur.
+              <br>
+              Yani GA4'ün kabul ettiği değerlerin 1435.56 TRY ve 2567.32 TRY (para birimi olmadan) şeklinde
               olması gerekiyor. <br>
               <br>
-              Bunun için yapılacak bir kaç işlem var; önce <code><strong>replaceAll</strong></code>
+              Bunun için yapılacak bir kaç işlem var; önce <code><strong>replace</strong></code>
               metodunu ele alalım.
             </p>
 
-            <hr class="hr-text" id="hr-border" data-content="replaceAll">
+            <hr class="hr-text" id="hr-border" data-content="replace">
 
             <pre>
-// On, yüz, bin, yüzbin ve ya milyonluk değerlerin virgül ile ayrıldığı, küsüratın ise nokta ile ayrıldığı değerler.
-// Bu tür değerlerde virgülü silersek işimiz tamamlanacak.
+// Yüz, bin, yüzbin ve ya milyonluk değerlerin virgül ile ayrıldığı, küsüratın ise nokta ile ayrıldığı değerler.
+// Bu tür değerlerden noktaya dokunmadan virgülü silersek işlem tamamlanacak.
 
-let fiyat = '1,567,435.56'
-let yeniFiyat = fiyat.replaceAll(',','') // Yeni fiyat 1567435.56
+var fiyat = '1,567,435.56'
+var yeniFiyat = fiyat.replaceAll(',','') // Yeni fiyat 1567435.56
 
 // Tam tersi durumlarda; küsüratın virgülle, diğerlerin nokta ile ayrıldığı değerler.
 // Bu tür değerlerde önce noktaları kaldırıp, sonda virgülü noktaya çevirebiliriz.
 
-let fiyat = '1.567.435,56'
-let yeniFiyat = fiyat.replaceAll('.','').replace(',','.') // Yeni fiyat 1567435.56
+var fiyat = '1.567.435,56'
+var yeniFiyat = fiyat.replaceAll('.','').replace(',','.') // Yeni fiyat 1567435.56
 </pre>
 
             <p>
@@ -208,19 +237,18 @@ let yeniFiyat = fiyat.replaceAll('.','').replace(',','.') // Yeni fiyat 1567435.
 
             <pre>
 function totalPrice() {
-  var price = '1234.564,67'
+  var price = '1.234.564,67'
   if (price.includes(',') || price.includes('.')) {
     var commaReplacePrice = price.replaceAll(',', '.')
-    var token = '.'
-    /* Requires STRING not contain TOKEN */
-    var parts = commaReplacePrice.split(token);
+    
+    var parts = commaReplacePrice.split('.');
     if (price.length <= 4) {
-      return price
+      return Number(price)
     } else {
-      return parts.slice(0, -1).join('') + '.' + parts.slice(-1)
+      return Number(parts.slice(0, -1).join('') + '.' + parts.slice(-1))
     }
   } else {
-    return price
+    return Number(price)
   }
 }
 </pre>
@@ -249,9 +277,9 @@ function totalPrice() {
 
         <div class="accordion-content" role="region" aria-labelledby="panel1-title" aria-hidden="true">
           <div>
-            <p>JavaScript <code><strong>addEventListener</strong></code> ve ya
-              <code><strong>onclick</strong></code> metodu ile tarayıcıda tıklanan
-              öğenin elementini yakayabilirsiniz.</p>
+            <p>JavaScript'te <code><strong>addEventListener</strong></code> ve ya
+              <code><strong>onclick</strong></code> metodları ile tarayıcıda tıklanan
+              öğenin elementini yakayabiliriz.</p>
             <p>
               Önce metodu konsola yazarak doğruluğunu kontrol ediyoruz:
             </p>
@@ -276,7 +304,7 @@ document.onclick = function (event) {
 };
 </pre>
 
-            <p>Şimdi de en çok ihtiyaç duyulan elementin metin, class, id ve varsa url değerlerini değişkene
+            <p>Şimdi de en çok ihtiyaç duyulan elementin içindeki yazıyı, class, id ve ya varsa url değerlerini değişkene
               atayabilirsiniz.</p>
 
             <pre>
@@ -286,7 +314,8 @@ document.onclick = function (event) {
     elementUrl = event.target.href;
     elementId = event.target.id;
 
-    // globalThis değişkeni fonksyiondan çıkararak global değişken haline getirir.
+    // "globalThis" değişkeni fonksyiondan çıkararak global değişken haline getirir.
+
     globalThis.elementText;
     globalThis.elementClass;
     globalThis.elementUrl;
@@ -297,19 +326,23 @@ document.onclick = function (event) {
 
             <p>
               Fakat GTM tıklama takiplerini JS kodu yazmadan da takip edilebileceğimiz tetikleyiciler
-              eklemiştir.
+              eklemiştir. <br>
               Bu tıklanmaları da kendi içinde ikiye ayırmış; Öğe Tıklanmaları ve Link Tıklanmaları. Fark
               şudur; tüm tıklamalar Öğe Tıklamalarına dahildir, Link Tıklamaları ise içinde url (href)
-              barındıran buton ve ya link tıklamalarıdır.
-              Öğe Tıklamaları için; <b>Tıklama > Tüm Öğeler (Click > All Elements)</b> , Link Tıklamaları
-              için; Tıklama > Yazlınca Bağlantılar (Click > Just Links) tetikleyicisini oluşturmamız
+              barındıran buton ve ya link tıklamalarıdır. <br>
+              Öğe Tıklamaları için; <b>Tıklama > Tüm Öğeler (Click > All Elements)</b>, Link Tıklamaları
+              için; <b>Tıklama > Yazlınca Bağlantılar (Click > Just Links)</b> tetikleyicisini oluşturmamız
               gerekiyor. Tetikleyici, kullanıcının eylemini takip eder. Bu eylemin değerlerini değişkenler
               takip eder. Dolayısı ile sadece Click ve ya Link Click tetikleyicilerini kurmak yeterli
               sayılmaz. Aynı zamanda bu tetikleyici türüne denk değişken türlerini de aktif etmemiz
-              gerekiyor. Bunun için Değişkenler bölümünden Yerleşik Değişkenlerden Tıklama türündeki
+              gerekiyor. <br>
+              Bunun için Değişkenler bölümünden Yerleşik Değişkenle > Tıklama türündeki
               değişkenleri aktif ediyoruz.
               İşlem sonucu şu olacak: Click tetikleyici ile tıklanan elementin Class ismini, mentini ve ya
-              url değerlerini ölçebilirsiniz.
+              url değerlerini ölçebilirsiniz. <br>
+              Peki GTM tetikleyicileri ile bunu yapabiliyorsak yukarıda bahsini ettiğimiz JS metdorlar ne işe yarıyor?
+              <br>
+              Bu metodlar yerine göre bize GTM tetikleyicilerinin ulaşamadığı yerlerde yardımcı olacaktır. Bunlardan başka konu başklıklarında bahsediyor olacağız.
             </p>
 
           </div>
@@ -320,68 +353,10 @@ document.onclick = function (event) {
 
       <hr>
 
-      <div class="accordion-panel">
-
-        <div class="topic_title">
-          <div class='order'>
-            <span>6</span>
-          </div>
-
-          <h2>
-            <button class="accordion-trigger" aria-expanded="false" aria-controls="accordion1-content">
-              Title 6
-            </button>
-          </h2>
-        </div>
-
-        <div class="accordion-content" role="region" aria-labelledby="panel1-title" aria-hidden="true">
-          <div>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab nulla blanditiis hic atque perferendis! Non deleniti sed amet culpa nulla voluptas officia, dolorum officiis, eius, sunt facere repellendus temporibus recusandae animi. Excepturi voluptatum eius labore corporis blanditiis odio aspernatur totam maiores officiis aliquam. Quibusdam numquam ut quidem nulla qui adipisci molestiae non dolor velit ad eum sint explicabo ratione eligendi, voluptatem sit dolorum inventore repellendus. Eligendi minus enim natus tempore, atque voluptates at ducimus alias consequatur asperiores sapiente quisquam animi obcaecati esse maxime molestiae pariatur consequuntur ipsa blanditiis voluptas sed rem non vel ex. Odit saepe fugit consectetur dolorem commodi.</p>
-          </div>
-        </div>
-      </div>
-
-      <hr>
-
-      <div class="accordion-panel">
-
-        <div class="topic_title">
-          <div class='order'>
-            <span>7</span>
-          </div>
-
-          <h2>
-            <button class="accordion-trigger" aria-expanded="false" aria-controls="accordion1-content">
-              Title 7
-            </button>
-          </h2>
-        </div>
-
-        <div class="accordion-content" role="region" aria-labelledby="panel1-title" aria-hidden="true">
-          <div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem harum natus rerum sapiente
-            fugiat soluta nostrum voluptatem totam libero laudantium esse laborum temporibus fugit, aliquid
-            consectetur ipsa perspiciatis explicabo labore?
-
-            <pre>
-
-                            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"primary visible info"</span>&gt;</span>Item<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-                        
-                      </pre>
-
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nostrum, at. Tempore quae quo dicta
-            ratione esse excepturi, ad culpa eveniet!
-
-          </div>
-        </div>
-      </div>
-
-      <hr>
-
     </div>
   </div>
 
-  <script src="/source.js" type="text/javascript"></script>
+  <script src="/index v2.js" type="text/javascript"></script>
 
 
 
